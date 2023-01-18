@@ -10,23 +10,29 @@ taught by Jakub Krompolc.
 ## Folder structure
 ```
 <project_root>
-|- src                  (the app)
-    |- activerecord     (modules that implement the active record design pattern)
-    |- appclasses       (classes specific for the application being developed)
-    |- shared           (usefull functions shared by the packages)
-    |- userinterface    (example of user interface class and related modules)
-|- docs                 (for the generated HTML documentation and coverage reports)
-    |- coverage         (for the generated HTML code coverage reports)
-    |- sphinx           (for the generated HTML documentation)
-|- py27env              (virtual environment folder)
-|- resources            (good to have and needed files)
-    |- example_files    (files that can be used as reference)
-    |- img              (images used in the interface creation)
-    |- qss              (for interface customization)
-    |- sql              (for databases)
-    |- ui               (files created in Qt Designer)
-|- scripts              (usefull bash scripts)
-|- tests                (unit tests)
+|-- assets
+|   `-- komodo
+|       |-- builder             (The skeleton folder containing the .mb file)
+|       |-- model               (The geometry folder containing the .mb file)
+|       |-- rig                 (The resulting rig)
+|       `-- weights
+|           `-- skinCluster     (Weight files are saved here)
+|-- code                        (This folder may contain Python, MEL, etc.)
+|   `-- python
+|       `-- src                 (the python app)
+|           |-- komodoRig
+|           |-- rigLib
+|           |   |-- base
+|           |   |-- rig
+|           |   |-- utils
+|           |-- rigTools
+|-- docs                        (for the generated HTML documentation and coverage reports)
+|   |-- coverage                (for the generated HTML code coverage reports)
+|   `-- sphinx                  (for the generated HTML documentation)
+|-- resources                   (good to have and needed files)
+|   `-- example_files           (files that can be used as reference)
+|-- scripts                     (usefull bash scripts)
+|-- tests                       (unit tests)
 
 ```
 
@@ -50,12 +56,13 @@ This starter kit allows the development of a more powerfull tool. Instead of cre
 ## Dependencies
 It depends on Node.js, but only for development (documentation and unit tests).
 
-Having a MySQL database server is only necessary if you need communication with
-one. If your scripts do not access a database, you do not need it.
+Install Node.js and navigate to the root folder of this project. Install node
+dependencies with the command:
+```
+npm install
+```
 
-If you use a Database Management System (DBMS) different from MySQL, editing the code will be easy.
-
-It is important to install the correct Python version (2.7.11 for Maya 2020 and below)
+It is important to install the correct Python version (2.7.11 for Maya 2020)
 in the operating system and to create a virtual environment (py27env folder).
 
 After that, it is important to install the necessary packages (inside the virtual
@@ -65,9 +72,8 @@ pip install -r requirements.txt
 ```
 
 ## Which file will be executed?
-Using this starter kit, the main.py (``<project_root>/code/python/src/procedural_rigging.py``) will be
+Using this project, the procedural_rigging.py (``<project_root>/code/python/src/procedural_rigging.py``) will be
 the file being executed from Autodesk Maya.
 
-It is recommended to create a shelf button that imports the main.py file (there is
+It is recommended to create a shelf button that imports the procedural_rigging.py file (there is
 an example in the ``resources/example_files`` folder).
-
