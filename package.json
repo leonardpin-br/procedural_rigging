@@ -1,0 +1,32 @@
+{
+  "name": "procedural-rigging",
+  "version": "1.0.0",
+  "description": "Project based on the online course Digital Tutors - Procedural Rigging with Python in Maya",
+  "main": "index.js",
+  "directories": {
+    "doc": "docs"
+  },
+  "keywords": [],
+  "author": "Leonardo Pinheiro",
+  "license": "MIT",
+  "scripts": {
+    "clear": "bash ./scripts/clear_project.sh",
+
+    "build:source:doc": "sphinx-apidoc --force -o ./docs/sphinx/source ./code/python/src",
+    "build:html:doc": "cd ./docs/sphinx && make clean && make html && cd .. && cd ..",
+    "build:doc": "npm run build:source:doc && npm run build:html:doc",
+    "watch:doc": "npx nodemon --ext py --watch ./code/python/src --exec \"npm run build:doc\"",
+    "server:doc": "npx live-server ./docs/sphinx/build/html --no-css-inject --port=8080 --wait=5000",
+
+    "clear:coverage": "coverage erase",
+    "build:source:coverage": "coverage run -m unittest discover",
+    "build:html:coverage": "coverage html",
+    "test": "npm run clear:coverage && npm run build:source:coverage && npm run build:html:coverage",
+    "watch:test": "npx nodemon --ext py --watch ./code/python/src --watch ./tests --exec \"npm run test\"",
+    "server:test": "npx live-server ./docs/coverage/htmlcov --no-css-inject --port=8181"
+  },
+  "devDependencies": {
+    "live-server": "^1.1.0",
+    "nodemon": "^2.0.19"
+  }
+}
