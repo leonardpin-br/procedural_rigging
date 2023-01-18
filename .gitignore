@@ -16,3 +16,6 @@ node_modules/*
 # Exclude all the Maya files:
 *.ma
 *.mb
+
+# Exclude the workspace.mel file:
+assets/komodo/workspace.mel
