@@ -10,13 +10,14 @@ taught by Jakub Krompolc.
 ## Folder structure
 ```
 <project_root>
-|-- assets                      (Contain static 3D element (e.g. Model, Rig, Textured Model, 3d environment))
-|   `-- komodo                  (The character's name)
-|       |-- builder             (The skeleton folder containing the .mb file)
-|       |-- model               (The geometry folder containing the .mb file)
-|       |-- rig                 (The resulting rig)
+|-- .vscode                     (Visual Studio Code specific files)
+|-- assets                      (Should contain static 3D element (e.g. Model, Rig, Textured Model, 3D environment))
+|   `-- komodo                  (Should be the character's name)
+|       |-- builder             (Should contain the skeleton file in .mb format)
+|       |-- model               (Should contain the geometry file in .mb format)
+|       |-- rig                 (Should contain the resulting rig)
 |       `-- weights
-|           `-- skinCluster     (Weight files are saved here in .swt format)
+|           `-- skinCluster     (Skin weight files should be saved here in .swt format)
 |-- code                        (This folder may contain Python, MEL, etc.)
 |   `-- python
 |       `-- src                 (the python app)
@@ -29,26 +30,22 @@ taught by Jakub Krompolc.
 |-- docs                        (for the generated HTML documentation and coverage reports)
 |   |-- coverage                (for the generated HTML code coverage reports)
 |   `-- sphinx                  (for the generated HTML documentation)
+|-- node_modules                (Node.js specific files)
+|-- py27env                     (virtual environment folder)
 |-- resources                   (good to have and needed files)
 |   `-- example_files           (files that can be used as reference)
 |-- scripts                     (usefull bash scripts)
-|-- tests                       (unit tests)
+|-- tests                       (Should contain unit tests, if you decide to use them.)
 
 ```
 
 ## It includes
-    1. Easy password hashing and verification (bcrypt). Even though Autodesk Maya is not able to load
-    the BCrypt package, if the user of this kit needs to hash and verify a password, it is already
-    preconfigured.
-    2. An abstract class to be inherited by all the others that access
-    the database. It is an application of the __active record__ design pattern.
-    3. Two example subclasses are provided. One for a product and one for
-    an admin, both are subclasses of the database one (active record).
-    4. The code is heavly documented (using Sphinx and Google style docstrings) and HTML generation
+    1. The code is heavly documented (using Sphinx and Google style docstrings) and HTML generation
     is preconfigured.
-    5. General and validation functions that can be easily reused in other
-    projects.
-    6. Unit tests and coverage are preconfigured.
+    2. The project is organized as instructed in the course, but using my boilerplate.
+    3. Unit tests and coverage are preconfigured (but not used).
+    4. The `package.json` file has many useful scripts for cleaning the project,
+    documentation and unit tests.
 
 ## Dependencies
 It depends on Node.js, but only for development (documentation and unit tests).
@@ -64,6 +61,11 @@ The `package.json` file has many useful scripts.
 It is important to install the correct Python version (2.7.11 for Maya 2020)
 in the operating system and to create a virtual environment (py27env folder)
 in the root folder of this project.
+
+Activate the virtual environment with the command:
+```
+source ./py27env/Scripts/activate
+```
 
 After that, it is important to install the necessary packages (inside the virtual
 environment) using:
