@@ -10,13 +10,13 @@ taught by Jakub Krompolc.
 ## Folder structure
 ```
 <project_root>
-|-- assets
-|   `-- komodo
+|-- assets                      (Contain static 3D element (e.g. Model, Rig, Textured Model, 3d environment))
+|   `-- komodo                  (The character's name)
 |       |-- builder             (The skeleton folder containing the .mb file)
 |       |-- model               (The geometry folder containing the .mb file)
 |       |-- rig                 (The resulting rig)
 |       `-- weights
-|           `-- skinCluster     (Weight files are saved here)
+|           `-- skinCluster     (Weight files are saved here in .swt format)
 |-- code                        (This folder may contain Python, MEL, etc.)
 |   `-- python
 |       `-- src                 (the python app)
@@ -35,9 +35,6 @@ taught by Jakub Krompolc.
 |-- tests                       (unit tests)
 
 ```
-
-## Why is it better than a script in a single file?
-This starter kit allows the development of a more powerfull tool. Instead of creating a single script, the user of this kit will be able to create a small application.
 
 ## It includes
     1. Easy password hashing and verification (bcrypt). Even though Autodesk Maya is not able to load
@@ -62,8 +59,11 @@ dependencies with the command:
 npm install
 ```
 
+The `package.json` file has many useful scripts.
+
 It is important to install the correct Python version (2.7.11 for Maya 2020)
-in the operating system and to create a virtual environment (py27env folder).
+in the operating system and to create a virtual environment (py27env folder)
+in the root folder of this project.
 
 After that, it is important to install the necessary packages (inside the virtual
 environment) using:
