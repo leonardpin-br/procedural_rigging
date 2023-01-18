@@ -1,12 +1,34 @@
-# Python starter project to create applications (not only but specially) for Autodesk Maya.
+# Python project for procedural rigging in Autodesk Maya.
 
-This starter kit is preconfigured to facilitate fast development.
+This project is based on my [python-maya-boilerplate](https://github.com/leonardpin-br/python-maya-boilerplate).
 
 ## Inspirations and reference
-This kit is heavily influenced by the greate course
-[PHP: Object-Oriented Programming with Databases](https://www.linkedin.com/learning/php-object-oriented-programming-with-databases)
-taught by Kevin Skoglund. If you are learning about OOP, I highly recommend it
-even if PHP is not your primary focus.
+This code is heavily influenced by the course
+[Procedural Rigging with Python in Maya](https://www.pluralsight.com/courses/procedural-rigging-python-maya-2283)
+taught by Jakub Krompolc.
+
+## Folder structure
+```
+<project_root>
+|- src                  (the app)
+    |- activerecord     (modules that implement the active record design pattern)
+    |- appclasses       (classes specific for the application being developed)
+    |- shared           (usefull functions shared by the packages)
+    |- userinterface    (example of user interface class and related modules)
+|- docs                 (for the generated HTML documentation and coverage reports)
+    |- coverage         (for the generated HTML code coverage reports)
+    |- sphinx           (for the generated HTML documentation)
+|- py27env              (virtual environment folder)
+|- resources            (good to have and needed files)
+    |- example_files    (files that can be used as reference)
+    |- img              (images used in the interface creation)
+    |- qss              (for interface customization)
+    |- sql              (for databases)
+    |- ui               (files created in Qt Designer)
+|- scripts              (usefull bash scripts)
+|- tests                (unit tests)
+
+```
 
 ## Why is it better than a script in a single file?
 This starter kit allows the development of a more powerfull tool. Instead of creating a single script, the user of this kit will be able to create a small application.
@@ -42,31 +64,8 @@ environment) using:
 pip install -r requirements.txt
 ```
 
-## Folder structure
-```
-<project_root>
-|- src                  (the app)
-    |- activerecord     (modules that implement the active record design pattern)
-    |- appclasses       (classes specific for the application being developed)
-    |- shared           (usefull functions shared by the packages)
-    |- userinterface    (example of user interface class and related modules)
-|- docs                 (for the generated HTML documentation and coverage reports)
-    |- coverage         (for the generated HTML code coverage reports)
-    |- sphinx           (for the generated HTML documentation)
-|- py27env              (virtual environment folder)
-|- resources            (good to have and needed files)
-    |- example_files    (files that can be used as reference)
-    |- img              (images used in the interface creation)
-    |- qss              (for interface customization)
-    |- sql              (for databases)
-    |- ui               (files created in Qt Designer)
-|- scripts              (usefull bash scripts)
-|- tests                (unit tests)
-
-```
-
 ## Which file will be executed?
-Using this starter kit, the main.py (``<project_root>/src/main.py``) will be
+Using this starter kit, the main.py (``<project_root>/code/python/src/procedural_rigging.py``) will be
 the file being executed from Autodesk Maya.
 
 It is recommended to create a shelf button that imports the main.py file (there is
