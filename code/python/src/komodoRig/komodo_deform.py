@@ -18,12 +18,6 @@ References:
 
 import os
 
-# Necessary to deal with Sphinx's limitation when parsing the code:
-try:
-    import sphinx.ext.autodoc.importer
-except:
-    pass
-
 import maya.cmds as mc
 import maya.mel as mm
 
@@ -121,8 +115,8 @@ def maketwistJoints(baseRig, parentJoints):
     Warning:
         Sphinx throws an error when parsing the code.
 
-        To deal with it, the `origJntRadius` variable (that should be multiplied)
-        is not multiplied when documenting this code.
+        To deal with it, the `origJntRadius` local variable (that should be
+        multiplied) is not multiplied when documenting this code.
 
     References:
         `Getting Sphinx to work with Maya modules`_
@@ -155,11 +149,13 @@ def maketwistJoints(baseRig, parentJoints):
         origJntRadius = mc.getAttr("{}.radius".format(parentJnt))
         for j in [twistParentJnt, twistChildJnt]:
 
-            # Deals with Sphinx limitation when parsing the code:
-            if type(origJntRadius) is sphinx.ext.autodoc.importer._MockObject:
-                mc.setAttr("{}.radius".format(j), (origJntRadius))
-            else:
+            # Deals with Sphinx's limitation when parsing the code:
+            # Sphinx understands origJntRadius is of type
+            # sphinx.ext.autodoc.importer._MockObject. So, it cannot be multiplied.
+            try:
                 mc.setAttr("{}.radius".format(j), (origJntRadius * 2))
+            except:
+                mc.setAttr("{}.radius".format(j), (origJntRadius))
 
             mc.color(j, ud=1)
         mc.parent(twistChildJnt, twistParentJnt)

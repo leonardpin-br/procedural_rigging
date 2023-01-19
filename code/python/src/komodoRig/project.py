@@ -1,21 +1,28 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 u"""main project file with central variables
+
+References:
+    `Get directory of current Python script`_
+
+.. _Get directory of current Python script:
+   https://www.geeksforgeeks.org/get-directory-of-current-python-script/
+
 """
 
 import os
 
-cwd = os.getcwd()
-cwd = cwd.replace("\\", "/")
+# Gets the full path of this script file dinamically.
+THIS_FILE_PATH = os.path.realpath(os.path.dirname(__file__)).replace("\\", "/")
 
-# Dealing with Sphinx limitation:
-if "sphinx" in cwd:
-    pathList = cwd.split("/")
+# Gets the full path of the project's root folder:
+pathList = THIS_FILE_PATH.split("/")
+pathList = pathList[:-4]
+project_root = "/".join(pathList)
 
-    # Removing "docs" and "sphinx" form path:
-    pathList = pathList[:-2]
-
-    cwd = "/".join(pathList)
 
 sceneScale = 1.0
-mainProjectPath = os.path.join(cwd, "assets").replace("\\", "/")
+u"""float: The default scene scale."""
+
+mainProjectPath = os.path.join(project_root, "assets").replace("\\", "/")
+u"""str: The full path to the `assets` folder."""
