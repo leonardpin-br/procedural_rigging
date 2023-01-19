@@ -5,7 +5,16 @@ This project is based on my [python-maya-boilerplate](https://github.com/leonard
 ## Inspirations and reference
 This code is heavily influenced by the course
 [Procedural Rigging with Python in Maya](https://www.pluralsight.com/courses/procedural-rigging-python-maya-2283)
-taught by Jakub Krompolc.
+taught by Jakub Krompolc. I chose to make changes of my own, though.
+
+## External code
+As instructed in the course, external code was integrated to complete functionality.
+[bSkinSaver 1.1.0 for Maya (maya script)](https://www.highend3d.com/maya/script/bskinsaver-for-maya),
+by Thomas Bittner was placed inside the `rigTools` folder. It was necessary to
+alter the original code because it did not work with Maya 2020.
+
+## Naming conventions
+This project is dependent on rigid naming conventions.
 
 ## Folder structure
 ```
