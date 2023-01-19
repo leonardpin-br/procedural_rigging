@@ -11,7 +11,7 @@ taught by Jakub Krompolc.
 ```
 <project_root>
 |-- .vscode                     (Visual Studio Code specific files)
-|-- assets                      (Should contain static 3D element (e.g. Model, Rig, Textured Model, 3D environment))
+|-- assets                      (for static 3D elements (Model, Rig, Textured Model, 3D environment))
 |   `-- komodo                  (Should be the character's name)
 |       |-- builder             (Should contain the skeleton file in .mb format)
 |       |-- model               (Should contain the geometry file in .mb format)
