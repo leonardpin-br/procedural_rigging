@@ -56,37 +56,43 @@ def build(spineJoints,
     spineCurveClusters = []
 
     for i in range(numSpineCVs):
-        cls = mc.cluster(spineCurveCVs[i],
-                         n="{}.Cluster{}".format(prefix, (i + 1)))[1]
+        clusterNumber = i + 1
+        deformerName = "{}Cluster{}".format(prefix, clusterNumber)
+        cls = mc.cluster(spineCurveCVs[i], n=deformerName)[1]
         spineCurveClusters.append(cls)
     mc.hide(spineCurveClusters)
 
-    # make controls
-    bodyCtrl = control.Control(prefix="{}Body".format(prefix),
-                               translateTo=bodyLocator,
-                               scale=(rigScale * 4),
-                               parent=rigmodule.controlsGrp)
-    chestCtrl = control.Control(prefix="{}Chest".format(prefix),
-                                translateTo=chestLocator,
-                                scale=(rigScale * 6),
-                                parent=bodyCtrl.C)
-    pelvisCtrl = control.Control(prefix="{}Pelvis".format(prefix),
-                                 translateTo=pelvisLocator,
-                                 scale=(rigScale * 6),
-                                 parent=bodyCtrl.C)
-    middleCtrl = control.Control(prefix="{}Middle".format(prefix),
-                                 translateTo=spineCurveClusters[2],
-                                 scale=(rigScale * 6),
-                                 parent=bodyCtrl.C)
+    # Dealing with Sphinx's limitation:
+    try:
+        # make controls
+        bodyCtrl = control.Control(prefix="{}Body".format(prefix),
+                                translateTo=bodyLocator,
+                                scale=(rigScale * 4),
+                                parent=rigmodule.controlsGrp)
+        chestCtrl = control.Control(prefix="{}Chest".format(prefix),
+                                    translateTo=chestLocator,
+                                    scale=(rigScale * 6),
+                                    parent=bodyCtrl.C)
+        pelvisCtrl = control.Control(prefix="{}Pelvis".format(prefix),
+                                    translateTo=pelvisLocator,
+                                    scale=(rigScale * 6),
+                                    parent=bodyCtrl.C)
+        middleCtrl = control.Control(prefix="{}Middle".format(prefix),
+                                    translateTo=spineCurveClusters[2],
+                                    scale=(rigScale * 6),
+                                    parent=bodyCtrl.C)
 
-    # attach controls
-    mc.parentConstraint(chestCtrl.C, pelvisCtrl.C,
-                        middleCtrl.Off, sr=["x", "y", "z"], mo=1)
+        # attach controls
+        mc.parentConstraint(chestCtrl.C, pelvisCtrl.C,
+                            middleCtrl.Off, sr=["x", "y", "z"], mo=1)
 
-    # attach clusters
-    mc.parent(spineCurveClusters[3:], chestCtrl.C)
-    mc.parent(spineCurveClusters[2], middleCtrl.C)
-    mc.parent(spineCurveClusters[:2], pelvisCtrl.C)
+        # attach clusters
+        mc.parent(spineCurveClusters[3:], chestCtrl.C)
+        mc.parent(spineCurveClusters[2], middleCtrl.C)
+        mc.parent(spineCurveClusters[:2], pelvisCtrl.C)
+
+    except:
+        pass
 
     # make IK handle
     spineIk = mc.ikHandle(n="{}_ikh".format(prefix),

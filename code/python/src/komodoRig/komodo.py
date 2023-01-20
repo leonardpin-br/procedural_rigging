@@ -4,11 +4,12 @@ u"""komodo dragon rig setup.
 
 Main module.
 """
-import sys
+
 import maya.cmds as mc
 
 from rigLib.base import control
 from rigLib.base import module
+from rigLib.rig import spine
 
 from . import project
 from . import komodo_deform
@@ -51,3 +52,28 @@ def build(characterName):
 
     # deform setup
     komodo_deform.build(baseRig, characterName)
+
+    # control setup
+    makeControlSetup(baseRig)
+
+
+def makeControlSetup(baseRig):
+    """make control setup
+
+    Args:
+        baseRig (`rigLib.base.module.Base`): Instance of `rigLib.base.module.Base`.
+    """
+
+    # spine
+    spineJoints = ['spine1_jnt', 'spine2_jnt', 'spine3_jnt',
+                   'spine4_jnt', 'spine5_jnt', 'spine6_jnt']
+    spineRig = spine.build(spineJoints=spineJoints,
+                           rootJnt=rootJnt,
+                           spineCurve="spine_crv",
+                           bodyLocator="body_loc",
+                           chestLocator="chest_loc",
+                           pelvisLocator="pelvis_loc",
+                           prefix="spine",
+                           rigScale=sceneScale,
+                           baseRig=baseRig
+                           )

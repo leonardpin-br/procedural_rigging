@@ -2,6 +2,14 @@
 
 This project is based on my [python-maya-boilerplate](https://github.com/leonardpin-br/python-maya-boilerplate).
 
+## It includes
+    1. The code is heavly documented (using Sphinx and Google style docstrings) and HTML generation
+    is preconfigured.
+    2. The project is organized as instructed in the course, but using my boilerplate.
+    3. Unit tests and coverage are preconfigured (but not used).
+    4. The `package.json` file has many useful scripts for cleaning the project,
+    documentation and unit tests.
+
 ## Inspirations and reference
 This code is heavily influenced by the course
 [Procedural Rigging with Python in Maya](https://www.pluralsight.com/courses/procedural-rigging-python-maya-2283)
@@ -10,11 +18,18 @@ taught by Jakub Krompolc. I chose to make changes of my own, though.
 ## External code
 As instructed in the course, external code was integrated to complete functionality.
 [bSkinSaver 1.1.0 for Maya (maya script)](https://www.highend3d.com/maya/script/bskinsaver-for-maya),
-by Thomas Bittner was placed inside the `rigTools` folder. It was necessary to
+by Thomas Bittner, was placed inside the `rigTools` folder. It was necessary to
 alter the original code because it did not work with Maya 2020.
 
 ## Naming conventions
 This project is dependent on rigid naming conventions.
+
+### Naming conventions inside the Maya files
+| Nodes    | convention  | Example    |
+|----------|-------------|------------|
+| Joints   | name#_jnt   | spine1_jnt |
+| Curves   | name_crv    | spine_crv  |
+| Locators | name_loc    | body_loc   |
 
 ## Folder structure
 ```
@@ -47,14 +62,6 @@ This project is dependent on rigid naming conventions.
 |-- tests                       (Should contain unit tests, if you decide to use them.)
 
 ```
-
-## It includes
-    1. The code is heavly documented (using Sphinx and Google style docstrings) and HTML generation
-    is preconfigured.
-    2. The project is organized as instructed in the course, but using my boilerplate.
-    3. Unit tests and coverage are preconfigured (but not used).
-    4. The `package.json` file has many useful scripts for cleaning the project,
-    documentation and unit tests.
 
 ## Dependencies
 It depends on Node.js, but only for development (documentation and unit tests).

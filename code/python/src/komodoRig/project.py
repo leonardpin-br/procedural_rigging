@@ -13,10 +13,10 @@ References:
 import os
 
 # Gets the full path of this script file dinamically.
-THIS_FILE_PATH = os.path.realpath(os.path.dirname(__file__)).replace("\\", "/")
+THIS_FILE_DIR = os.path.realpath(os.path.dirname(__file__)).replace("\\", "/")
 
 # Gets the full path of the project's root folder:
-pathList = THIS_FILE_PATH.split("/")
+pathList = THIS_FILE_DIR.split("/")
 pathList = pathList[:-4]
 project_root = "/".join(pathList)
 

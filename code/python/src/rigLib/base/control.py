@@ -8,7 +8,7 @@ import maya.cmds as mc
 
 class Control():
 
-    def __init__(self, prefix="new", scale=1.0, translateTo="", rotateTo="", parent="", lockChannels=["s", "v"]):
+    def __init__(self, prefix="new", scale=1.0, translateTo="", rotateTo="", parent="", shape="circle", lockChannels=["s", "v"]):
         u"""Class for building rig control.
 
         Args:
