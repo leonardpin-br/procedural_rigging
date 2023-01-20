@@ -5,6 +5,9 @@ u"""
     (c) 2013 - 2016 by Thomas Bittner
     thomasbittner@hotmail.de
 
+    This code was altered by Leonardo Pinheiro because it did
+    not work with Autodesk Maya 2020.
+
     source the file and then run: showUI()
 
 
