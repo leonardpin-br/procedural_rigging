@@ -5,7 +5,7 @@ pushd %~dp0
 REM Command file for Sphinx documentation
 
 if "%SPHINXBUILD%" == "" (
-	set SPHINXBUILD=mayapy "E:/cloud/Videoaulas/Digital Tutors - Procedural Rigging with Python in Maya/procedural_rigging/resources/documentation_config/build_sphinx_mayadoc.py"
+	set SPHINXBUILD=mayapy "E:/cloud/Backup/Libraries/scripts/maya/procedural_rigging/resources/documentation_config/build_sphinx_mayadoc.py"
 )
 set SOURCEDIR=source
 set BUILDDIR=build

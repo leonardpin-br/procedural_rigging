@@ -16,8 +16,9 @@
 # https://stackoverflow.com/questions/12487424/uppercase-first-character-in-a-variable-with-bash
 
 include() {
-    # MY_DIR corresponde ao diretório do arquivo principal.
+    # MY_DIR is the <project_root>/scripts directory.
     MY_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"
+
     . "${MY_DIR}"/$1
 }
 
@@ -66,7 +67,6 @@ update_make_bat() {
     sed -i "s+.*$OLD_LINE.*+$CONFIG_FILE+" $MAKE_BAT
 
     # done
-
     echo -e "The path in the make.bat file was updated."
     exit 0
 

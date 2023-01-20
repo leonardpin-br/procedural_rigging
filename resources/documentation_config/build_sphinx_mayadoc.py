@@ -1,7 +1,7 @@
 #!mayapy.exe
-u"""(Tries to) Serve as a configuration file to Sphinx to work with Maya 2020 modules.
+u"""Serves as a configuration file to Sphinx to work with Maya 2020 modules.
 
-I do not know how to make it work yet.
+There are more explanations on how to use it on the README.md file.
 
 References:
     `Getting Sphinx to work with Maya modules`_
@@ -16,6 +16,8 @@ References:
 
     `Standalone Maya Python Interpreter`_
 
+    `Could not import extension sphinxcontrib.napoleon #10378`_
+
 .. _Getting Sphinx to work with Maya modules:
    https://geektalker.wordpress.com/2013/03/26/getting-sphinx-to-work-with-maya-modules/
 .. _How Should I Set Default Python Version In Windows?:
@@ -28,6 +30,8 @@ References:
    https://stackoverflow.com/a/40638825/3768670
 .. _Standalone Maya Python Interpreter:
    https://help.autodesk.com/cloudhelp/2017/ENU/Maya-Tech-Docs/PyMel/standalone.html#standalone-maya-python-interpreter
+.. _Could not import extension sphinxcontrib.napoleon #10378:
+   https://github.com/sphinx-doc/sphinx/issues/10378#issuecomment-1107455569
 """
 
 
