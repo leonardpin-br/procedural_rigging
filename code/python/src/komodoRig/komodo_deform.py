@@ -1,4 +1,3 @@
-#!/usr/bin/env python
 # -*- coding: utf-8 -*-
 u"""komodo dragon rig setup.
 
@@ -149,14 +148,7 @@ def maketwistJoints(baseRig, parentJoints):
         origJntRadius = mc.getAttr("{}.radius".format(parentJnt))
         for j in [twistParentJnt, twistChildJnt]:
 
-            # Deals with Sphinx's limitation when parsing the code:
-            # Sphinx understands origJntRadius is of type
-            # sphinx.ext.autodoc.importer._MockObject. So, it cannot be multiplied.
-            try:
-                mc.setAttr("{}.radius".format(j), (origJntRadius * 2))
-            except:
-                mc.setAttr("{}.radius".format(j), (origJntRadius))
-
+            mc.setAttr("{}.radius".format(j), (origJntRadius * 2))
             mc.color(j, ud=1)
         mc.parent(twistChildJnt, twistParentJnt)
         mc.parent(twistParentJnt, twistJntGrp)

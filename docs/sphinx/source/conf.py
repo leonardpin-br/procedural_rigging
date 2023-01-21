@@ -45,10 +45,10 @@ extensions = [
 ]
 
 autodoc_mock_imports = [
-    'maya',
-    'pymel',
-    'PySide2',
-    'shiboken2',
+    # 'maya',
+    # 'pymel',
+    # 'PySide2',
+    # 'shiboken2',
     'rigTools.bSkinSaver'
 ]
 

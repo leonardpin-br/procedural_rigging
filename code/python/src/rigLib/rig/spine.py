@@ -1,4 +1,3 @@
-#!/usr/bin/env python
 # -*- coding: utf-8 -*-
 u"""spine @ rig
 """
@@ -62,37 +61,32 @@ def build(spineJoints,
         spineCurveClusters.append(cls)
     mc.hide(spineCurveClusters)
 
-    # Dealing with Sphinx's limitation:
-    try:
-        # make controls
-        bodyCtrl = control.Control(prefix="{}Body".format(prefix),
-                                translateTo=bodyLocator,
-                                scale=(rigScale * 4),
-                                parent=rigmodule.controlsGrp)
-        chestCtrl = control.Control(prefix="{}Chest".format(prefix),
-                                    translateTo=chestLocator,
-                                    scale=(rigScale * 6),
-                                    parent=bodyCtrl.C)
-        pelvisCtrl = control.Control(prefix="{}Pelvis".format(prefix),
-                                    translateTo=pelvisLocator,
-                                    scale=(rigScale * 6),
-                                    parent=bodyCtrl.C)
-        middleCtrl = control.Control(prefix="{}Middle".format(prefix),
-                                    translateTo=spineCurveClusters[2],
-                                    scale=(rigScale * 6),
-                                    parent=bodyCtrl.C)
+    # make controls
+    bodyCtrl = control.Control(prefix="{}Body".format(prefix),
+                            translateTo=bodyLocator,
+                            scale=(rigScale * 4),
+                            parent=rigmodule.controlsGrp)
+    chestCtrl = control.Control(prefix="{}Chest".format(prefix),
+                                translateTo=chestLocator,
+                                scale=(rigScale * 6),
+                                parent=bodyCtrl.C)
+    pelvisCtrl = control.Control(prefix="{}Pelvis".format(prefix),
+                                translateTo=pelvisLocator,
+                                scale=(rigScale * 6),
+                                parent=bodyCtrl.C)
+    middleCtrl = control.Control(prefix="{}Middle".format(prefix),
+                                translateTo=spineCurveClusters[2],
+                                scale=(rigScale * 6),
+                                parent=bodyCtrl.C)
 
-        # attach controls
-        mc.parentConstraint(chestCtrl.C, pelvisCtrl.C,
-                            middleCtrl.Off, sr=["x", "y", "z"], mo=1)
+    # attach controls
+    mc.parentConstraint(chestCtrl.C, pelvisCtrl.C,
+                        middleCtrl.Off, sr=["x", "y", "z"], mo=1)
 
-        # attach clusters
-        mc.parent(spineCurveClusters[3:], chestCtrl.C)
-        mc.parent(spineCurveClusters[2], middleCtrl.C)
-        mc.parent(spineCurveClusters[:2], pelvisCtrl.C)
-
-    except:
-        pass
+    # attach clusters
+    mc.parent(spineCurveClusters[3:], chestCtrl.C)
+    mc.parent(spineCurveClusters[2], middleCtrl.C)
+    mc.parent(spineCurveClusters[:2], pelvisCtrl.C)
 
     # make IK handle
     spineIk = mc.ikHandle(n="{}_ikh".format(prefix),

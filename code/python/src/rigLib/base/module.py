@@ -1,4 +1,3 @@
-#!/usr/bin/env python
 # -*- coding: utf-8 -*-
 u"""Module for making top rig structure and rig module.
 """
