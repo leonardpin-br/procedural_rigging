@@ -44,11 +44,11 @@ References:
 
 import sys
 
-print("\n\n===========================================================\n")
-print("Python executable full path:")
-print(sys.executable)
-print("Testing the shebang...")
-print("\n===========================================================\n\n")
+# print("\n\n===========================================================\n")
+# print("Python executable full path:")
+# print(sys.executable)
+# print("Testing the shebang...")
+# print("\n===========================================================\n\n")
 
 
 

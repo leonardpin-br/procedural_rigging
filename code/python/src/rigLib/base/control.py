@@ -16,6 +16,7 @@ class Control():
             translateTo (str, optional): Reference object for control position. Defaults to "".
             rotateTo (str, optional): Reference object for control orientation. Defaults to "".
             parent (str, optional): Object to be parent of new control. Defaults to "".
+            shape (str, optional): Control shape type. Defaults to "circle".
             lockChannels (list, optional): List of channels on control to be locked and non-keyable. Defaults to ["s", "v"].
 
         Returns:
@@ -23,8 +24,19 @@ class Control():
 
         """
 
+        circleNormal = [1, 0, 0]
+
+        if shape in ["circle", "circleX"]:
+            circleNormal = [1, 0, 0]
+
+        elif shape == "circleY":
+            circleNormal = [0, 1, 0]
+
+        elif shape == "circleZ":
+            circleNormal = [0, 0, 1]
+
         ctrlObject = mc.circle(
-            n=prefix + "_ctl", ch=False, normal=[1, 0, 0], radius=scale)[0]
+            n=prefix + "_ctl", ch=False, normal=circleNormal, radius=scale)[0]
         ctrlOffset = mc.group(n=prefix + "Offset_grp", em=1)
         mc.parent(ctrlObject, ctrlOffset)
 

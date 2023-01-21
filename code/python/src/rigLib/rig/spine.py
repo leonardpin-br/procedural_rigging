@@ -21,7 +21,7 @@ def build(spineJoints,
     u"""_summary_
 
     Args:
-        spineJoints (str): List of 6 spine joints.
+        spineJoints (list[str]): List of 6 spine joints.
         rootJnt (str): Root joint.
         spineCurve (str): Name of spine cubic curve with 5 CVs matching first 5 spine joints.
         bodyLocator (str): Reference transform for position of body control.
@@ -69,15 +69,20 @@ def build(spineJoints,
     chestCtrl = control.Control(prefix="{}Chest".format(prefix),
                                 translateTo=chestLocator,
                                 scale=(rigScale * 6),
-                                parent=bodyCtrl.C)
+                                parent=bodyCtrl.C,
+                                shape="circleZ")
     pelvisCtrl = control.Control(prefix="{}Pelvis".format(prefix),
                                 translateTo=pelvisLocator,
                                 scale=(rigScale * 6),
-                                parent=bodyCtrl.C)
+                                parent=bodyCtrl.C,
+                                shape="circleZ")
     middleCtrl = control.Control(prefix="{}Middle".format(prefix),
                                 translateTo=spineCurveClusters[2],
-                                scale=(rigScale * 6),
-                                parent=bodyCtrl.C)
+                                scale=(rigScale * 3),
+                                parent=bodyCtrl.C,
+                                shape="circleZ")
+
+    _adjustBodyCtrlShape(bodyCtrl, spineJoints, rigScale)
 
     # attach controls
     mc.parentConstraint(chestCtrl.C, pelvisCtrl.C,
@@ -111,3 +116,19 @@ def build(spineJoints,
     mc.parentConstraint(pelvisCtrl.C, rootJnt, mo=1)
 
     return {"module": rigmodule}
+
+def _adjustBodyCtrlShape(bodyCtrl, spineJoints, rigScale):
+    """offset body control along spine Y axis.
+
+    Args:
+        bodyCtrl (`rigLib.base.control.Control`): Instance of `rigLib.base.control.Control`.
+        spineJoints (list[str]): List of 6 spine joints.
+        rigScale (float, optional): Scale factor for size of controls.
+    """
+
+    offsetGrp = mc.group(em=1, p=bodyCtrl.C)
+    mc.parent(offsetGrp, spineJoints[2])
+    ctrlCls = mc.cluster(mc.listRelatives(bodyCtrl.C, s=1))[1]
+    mc.parent(ctrlCls, offsetGrp)
+    mc.move(10 * rigScale, offsetGrp, moveY=1, relative=1, objectSpace=1)
+    mc.delete(bodyCtrl.C, ch=1)
