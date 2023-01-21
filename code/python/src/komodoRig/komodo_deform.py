@@ -111,12 +111,6 @@ def maketwistJoints(baseRig, parentJoints):
         baseRig (`rigLib.base.module.Base`): Instance of `rigLib.base.module.Base`.
         parentJoints (list(str)): List of strings containing the parent joints' names.
 
-    Warning:
-        Sphinx throws an error when parsing the code.
-
-        To deal with it, the `origJntRadius` local variable (that should be
-        multiplied) is not multiplied when documenting this code.
-
     References:
         `Getting Sphinx to work with Maya modules`_
 

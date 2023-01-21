@@ -1,7 +1,13 @@
-#!mayapy.exe
+# -*- coding: utf-8 -*-
 u"""Serves as a configuration file to Sphinx to work with Maya 2020 modules.
 
 There are more explanations on how to use it on the README.md file.
+
+Important:
+    The Shebang Line appears to have no practical effect, at least on Windows.
+
+    The use of the `mayapy` command, inside the `make.bat` file, makes all the
+    difference in the execution of the documentation generation.
 
 References:
     `Getting Sphinx to work with Maya modules`_
@@ -18,6 +24,8 @@ References:
 
     `Could not import extension sphinxcontrib.napoleon #10378`_
 
+    `3.7 Shebang Line`_
+
 .. _Getting Sphinx to work with Maya modules:
    https://geektalker.wordpress.com/2013/03/26/getting-sphinx-to-work-with-maya-modules/
 .. _How Should I Set Default Python Version In Windows?:
@@ -32,6 +40,8 @@ References:
    https://help.autodesk.com/cloudhelp/2017/ENU/Maya-Tech-Docs/PyMel/standalone.html#standalone-maya-python-interpreter
 .. _Could not import extension sphinxcontrib.napoleon #10378:
    https://github.com/sphinx-doc/sphinx/issues/10378#issuecomment-1107455569
+.. _3.7 Shebang Line:
+   https://google.github.io/styleguide/pyguide.html#37-shebang-line
 """
 
 
