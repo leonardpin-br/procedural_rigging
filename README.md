@@ -124,7 +124,7 @@ npm run update:make_bat
 ```
 It executes a BASH script (`<project_root>/scripts/update_make_bat.sh`). In turn, that script edits the `make.bat` file with the follwing:
 ```
-set SPHINXBUILD=mayapy <full_path_to_the_build_sphinx_mayadoc.py_file>
+set SPHINXBUILD=mayapy "<full/path/to/the/build_sphinx_mayadoc.py>"
 ```
 The above file (`build_sphinx_mayadoc.py`) is a custom config file that redirects Sphinx to work with the python interpreter bundled with Maya. That file has a particularity:
 ```
