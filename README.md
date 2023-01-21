@@ -102,9 +102,16 @@ The provided `package.json` file has many useful scripts.
 
 ### Python version and virtual environments
 
-In my case, I installed a Python 3 version first (so I can install tools like Qt Designer later) and them installed the virtualenv package. This will allow you to create virtual environments.
+It will be advantageous to install a Python 3 version first and them install the
+`virtualenv` package. One advantage of having Python 3 is the possibility to
+install tools like Qt Designer later. Another very useful factor is the
+installation of lauchers. The configuration os Sphinx will depend on it later.
 
-You can do it with only one Python version ([Create virtualenv in Python 2.7 on windows 10 while other virtualenv are working in Python 3.8](https://stackoverflow.com/a/64940580/3768670)) if you want.
+`virtualenv` will allow you to create virtual environments.
+
+You could do it with only one (Python 2) version
+([Create virtualenv in Python 2.7 on windows 10 while other virtualenv are working in Python 3.8](https://stackoverflow.com/a/64940580/3768670))
+if you wanted. But, I do not recommend it.
 
 ```
 pip install virtualenv
@@ -176,7 +183,7 @@ The result is:
 
 ```
 #! mayapy.exe                                           => Cygwin only accepts this one.
-#! /c/Progra~1/Autodesk/Maya2020/bin/mayapy.exe         => Git Bash accepts the first and this one.
+#! /c/Progra~1/Autodesk/Maya2020/bin/mayapy.exe         => Git Bash accepts the first and the second.
 #! "C:\Program Files\Autodesk\Maya2020\bin\mayapy.exe"  => Only accepted by Command Prompt and PowerShell.
 ```
 
@@ -231,7 +238,7 @@ The result is the same on all terminals:
 
 - The Python executable is the one inside the py27env.
 
-- That interpreter does not now any Maya module. So, it fails to import them.
+- That interpreter does not know anything about any Maya module. So, it fails to import them.
 
 
 
