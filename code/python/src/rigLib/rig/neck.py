@@ -48,33 +48,47 @@ def build(neckJoints,
     numNeckCVs = len(neckCurveCVs)
     neckCurveClusters = []
 
-    for i in range(numSpineCVs):
-        clusterNumber = i + 1
-        deformerName = "{}Cluster{}".format(prefix, clusterNumber)
-        cls = mc.cluster(spineCurveCVs[i], n=deformerName)[1]
-        spineCurveClusters.append(cls)
-    mc.hide(spineCurveClusters)
+    for i in range(numNeckCVs):
+        clusterWithNumber = "Cluster%d" % (i + 1)
+        cls = mc.cluster(neckCurveCVs[i], n="{}{}".format(prefix, clusterWithNumber))[1]
+        neckCurveClusters.append(cls)
+    mc.hide(neckCurveClusters)
+
+    # parent neck curve
+    mc.parent(neckCurve, rigmodule.partsNoTransGrp)
+
+    # make attach groups
+    bodyAttachGrp = mc.group(n="{}BodyAttach_grp".format(prefix), em=1, p=rigmodule.partsGrp)
+    baseAttachGrp = mc.group(n="{}BaseAttach_grp".format(prefix), em=1, p=rigmodule.partsGrp)
+
+    mc.delete(mc.pointConstraint(neckJoints[0], baseAttachGrp))
 
     # make controls
-    bodyCtrl = control.Control(prefix="{}Body".format(prefix),
-                            translateTo=bodyLocator,
+    headMainCtrl = control.Control(prefix="{}HeadMain".format(prefix),
+                            translateTo=neckJoints[-1],
+                            scale=(rigScale * 5),
+                            parent=rigmodule.controlsGrp,
+                            shape="circleZ")
+    headLocalCtrl = control.Control(prefix="{}HeadLocal".format(prefix),
+                            translateTo=headJnt,
+                            rotateTo=headJnt,
                             scale=(rigScale * 4),
-                            parent=rigmodule.controlsGrp)
-    chestCtrl = control.Control(prefix="{}Chest".format(prefix),
-                                translateTo=chestLocator,
-                                scale=(rigScale * 6),
-                                parent=bodyCtrl.C,
-                                shape="circleZ")
-    pelvisCtrl = control.Control(prefix="{}Pelvis".format(prefix),
-                                translateTo=pelvisLocator,
-                                scale=(rigScale * 6),
-                                parent=bodyCtrl.C,
-                                shape="circleZ")
-    middleCtrl = control.Control(prefix="{}Middle".format(prefix),
-                                translateTo=spineCurveClusters[2],
-                                scale=(rigScale * 3),
-                                parent=bodyCtrl.C,
-                                shape="circleZ")
+                            parent=headMainCtrl.C,
+                            shape="circleX")
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     _adjustBodyCtrlShape(bodyCtrl, spineJoints, rigScale)
 

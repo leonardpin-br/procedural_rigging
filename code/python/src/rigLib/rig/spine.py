@@ -61,6 +61,9 @@ def build(spineJoints,
         spineCurveClusters.append(cls)
     mc.hide(spineCurveClusters)
 
+    # parent spine curve
+    mc.parent(spineCurve, rigmodule.partsNoTransGrp)
+
     # make controls
     bodyCtrl = control.Control(prefix="{}Body".format(prefix),
                             translateTo=bodyLocator,
