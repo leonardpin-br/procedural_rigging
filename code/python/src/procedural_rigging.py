@@ -50,17 +50,17 @@ References:
 
 import sys
 
-# print("\n\n===========================================================\n")
-# print("Python executable full path:")
-# print(sys.executable)
-# print("Testing the shebang...")
-# print("\n===========================================================\n\n")
-
-
-
-
 import komodoRig
+import rigLib
 
 characterName = "komodo"
 komodoRig.komodo.build(characterName)
 print("komodoRig.komodo.build() function executed successfully!")
+
+rigLib.base.control.Control(shape="sphere")
+
+print("\n\n===========================================================\n")
+print("Python executable full path:")
+print(sys.executable)
+print("Testing the shebang...")
+print("\n===========================================================\n\n")

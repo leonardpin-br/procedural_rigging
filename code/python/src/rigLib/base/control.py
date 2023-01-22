@@ -24,6 +24,7 @@ class Control():
 
         """
 
+        ctrlObject = None
         circleNormal = [1, 0, 0]
 
         if shape in ["circle", "circleX"]:
@@ -35,23 +36,31 @@ class Control():
         elif shape == "circleZ":
             circleNormal = [0, 0, 1]
 
-        ctrlObject = mc.circle(
-            n=prefix + "_ctl", ch=False, normal=circleNormal, radius=scale)[0]
+        elif shape == "sphere":
+            ctrlObject = mc.circle(n="{}_ctl".format(prefix), ch=False, normal=[1, 0, 0], radius=scale)[0]
+            addShape = mc.circle(n="{}_ctl2".format(prefix), ch=False, normal=[0, 0, 1], radius=scale)[0]
+            mc.parent(mc.listRelatives(addShape, s=1), ctrlObject, r=1, s=1)
+            mc.delete(addShape)
+
+        if not ctrlObject:
+            ctrlObject = mc.circle(
+                n=prefix + "_ctl", ch=False, normal=circleNormal, radius=scale)[0]
+
         ctrlOffset = mc.group(n=prefix + "Offset_grp", em=1)
         mc.parent(ctrlObject, ctrlOffset)
 
         # Color control
-        ctrlShape = mc.listRelatives(ctrlObject, s=1)[0]
-        mc.setAttr("{}.ove".format(ctrlShape), 1)
+        ctrlShapes = mc.listRelatives(ctrlObject, s=1)
+        [mc.setAttr("{}.ove".format(s), 1) for s in ctrlShapes]
 
         if prefix.startswith("l_"):
-            mc.setAttr("{}.ovc".format(ctrlShape), 6)
+            [mc.setAttr("{}.ovc".format(s), 6) for s in ctrlShapes]
 
         elif prefix.startswith("r_"):
-            mc.setAttr("{}.ovc".format(ctrlShape), 13)
+            [mc.setAttr("{}.ovc".format(s), 13) for s in ctrlShapes]
 
         else:
-            mc.setAttr("{}.ovc".format(ctrlShape), 22)
+            [mc.setAttr("{}.ovc".format(s), 22) for s in ctrlShapes]
 
         # Translate control
         if mc.objExists(translateTo):
