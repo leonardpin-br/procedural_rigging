@@ -11,13 +11,19 @@ Important:
 
         C:\\Windows\\pyw.exe
 
-Important:
+Warning:
     The Shebang Line appears to have no practical effect, at least on Windows,
     in the ``<project_root>/resources/documentation_config/build_sphinx_mayadoc.py``
-    file.
+    file even with the ``.py`` files associated with the launcher
+    (``C:\\Windows\\pyw.exe``).
 
-    The use of the **mayapy** command, inside the **make.bat** file, makes all the
-    difference in the execution of the documentation generation.
+    To make that script a little bit more portable, the shebang line is:
+
+        #! /usr/bin/env python2
+
+
+    The use of the **mayapy** command, inside the ``make.bat`` file, makes all
+    the difference in the execution of the documentation generation.
 
 References:
     `3.7 Shebang Line`_

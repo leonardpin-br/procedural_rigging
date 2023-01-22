@@ -1,13 +1,22 @@
+#! /usr/bin/env python2
 # -*- coding: utf-8 -*-
 u"""Serves as a configuration file to Sphinx to work with Maya 2020 modules.
 
 There are more explanations on how to use it on the README.md file.
 
-Important:
-    The Shebang Line appears to have no practical effect, at least on Windows.
+Warning:
+    The Shebang Line appears to have no practical effect, at least on Windows,
+    in the ``<project_root>/resources/documentation_config/build_sphinx_mayadoc.py``
+    file even with the ``.py`` files associated with the launcher
+    (``C:\\Windows\\pyw.exe``).
 
-    The use of the `mayapy` command, inside the `make.bat` file, makes all the
-    difference in the execution of the documentation generation.
+    To make this script a little bit more portable, the shebang line is:
+
+        #! /usr/bin/env python2
+
+
+    The use of the **mayapy** command, inside the ``make.bat`` file, makes all
+    the difference in the execution of the documentation generation.
 
 References:
     `Getting Sphinx to work with Maya modules`_
@@ -26,6 +35,8 @@ References:
 
     `3.7 Shebang Line`_
 
+    `Should I put #! (shebang) in Python scripts, and what form should it take?`_
+
 .. _Getting Sphinx to work with Maya modules:
    https://geektalker.wordpress.com/2013/03/26/getting-sphinx-to-work-with-maya-modules/
 .. _How Should I Set Default Python Version In Windows?:
@@ -42,6 +53,8 @@ References:
    https://github.com/sphinx-doc/sphinx/issues/10378#issuecomment-1107455569
 .. _3.7 Shebang Line:
    https://google.github.io/styleguide/pyguide.html#37-shebang-line
+.. _Should I put #! (shebang) in Python scripts, and what form should it take?:
+   https://stackoverflow.com/a/14599026/3768670
 """
 
 

@@ -143,9 +143,9 @@ extensions = [
 ]
 
 autodoc_mock_imports = [    <= Auto mock in the conf.py file.
-    'maya',
-    'pymel',
-    'PySide2'
+    # 'maya',
+    # 'pymel',
+    # 'PySide2'
 ]
 
 master_doc = 'index'    <= Added
