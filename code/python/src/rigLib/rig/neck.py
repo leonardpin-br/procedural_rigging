@@ -75,68 +75,44 @@ def build(neckJoints,
                             scale=(rigScale * 4),
                             parent=headMainCtrl.C,
                             shape="circleX")
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    _adjustBodyCtrlShape(bodyCtrl, spineJoints, rigScale)
+    middleCtrl = control.Control(prefix="Middle".format(prefix),
+                                 translateTo=neckCurveClusters[2],
+                                 rotateTo=neckJoints[2],
+                                 scale=(rigScale * 4),
+                                 parent=rigmodule.controlsGrp,
+                                 shape="circleX")
 
     # attach controls
-    mc.parentConstraint(chestCtrl.C, pelvisCtrl.C,
+    mc.parentConstraint(headMainCtrl.C, baseAttachGrp,
                         middleCtrl.Off, sr=["x", "y", "z"], mo=1)
+    mc.orientConstraint(baseAttachGrp, middleCtrl.Off, mo=1)
+    mc.parentConstraint(bodyAttachGrp, headMainCtrl.Off, mo=1)
 
     # attach clusters
-    mc.parent(spineCurveClusters[3:], chestCtrl.C)
-    mc.parent(spineCurveClusters[2], middleCtrl.C)
-    mc.parent(spineCurveClusters[:2], pelvisCtrl.C)
+    mc.parent(neckCurveClusters[3:], headMainCtrl.C)
+    mc.parent(neckCurveClusters[2], middleCtrl.C)
+    mc.parent(neckCurveClusters[:2], baseAttachGrp)
+
+    # attach joints
+    mc.orientConstraint(headLocalCtrl.C, headJnt, mo=1)
 
     # make IK handle
-    spineIk = mc.ikHandle(n="{}_ikh".format(prefix),
+    neckIk = mc.ikHandle(n="{}_ikh".format(prefix),
                           sol="ikSplineSolver",
-                          sj=spineJoints[0],
-                          ee=spineJoints[-2],
-                          c=spineCurve,
+                          sj=neckJoints[0],
+                          ee=neckJoints[-1],
+                          c=neckCurve,
                           ccv=0,
                           parentCurve=0)[0]
-    mc.hide(spineIk)
-    mc.parent(spineIk, rigmodule.partsNoTransGrp)
+    mc.hide(neckIk)
+    mc.parent(neckIk, rigmodule.partsNoTransGrp)
 
     # setup IK twist
-    mc.setAttr("{}.dTwistControlEnable".format(spineIk), 1)
-    mc.setAttr("{}.dWorldUpType".format(spineIk), 4)
-    mc.connectAttr("{}.worldMatrix[0]".format(chestCtrl.C),
-                   "{}.dWorldUpMatrixEnd".format(spineIk))
-    mc.connectAttr("{}.worldMatrix[0]".format(pelvisCtrl.C),
-                   "{}.dWorldUpMatrix".format(spineIk))
+    mc.setAttr("{}.dTwistControlEnable".format(neckIk), 1)
+    mc.setAttr("{}.dWorldUpType".format(neckIk), 4)
+    mc.connectAttr("{}.worldMatrix[0]".format(headMainCtrl.C),
+                   "{}.dWorldUpMatrixEnd".format(neckIk))
+    mc.connectAttr("{}.worldMatrix[0]".format(baseAttachGrp),
+                   "{}.dWorldUpMatrix".format(neckIk))
 
-    # attach root joint
-    mc.parentConstraint(pelvisCtrl.C, rootJnt, mo=1)
-
-    return {"module": rigmodule}
-
-def _adjustBodyCtrlShape(bodyCtrl, spineJoints, rigScale):
-    """offset body control along spine Y axis.
-
-    Args:
-        bodyCtrl (`rigLib.base.control.Control`): Instance of `rigLib.base.control.Control`.
-        spineJoints (list[str]): List of 6 spine joints.
-        rigScale (float, optional): Scale factor for size of controls.
-    """
-
-    offsetGrp = mc.group(em=1, p=bodyCtrl.C)
-    mc.parent(offsetGrp, spineJoints[2])
-    ctrlCls = mc.cluster(mc.listRelatives(bodyCtrl.C, s=1))[1]
-    mc.parent(ctrlCls, offsetGrp)
-    mc.move(10 * rigScale, offsetGrp, moveY=1, relative=1, objectSpace=1)
-    mc.delete(bodyCtrl.C, ch=1)
+    return {"module": rigmodule, "baseAttachGrp": baseAttachGrp, "bodyAttachGrp": bodyAttachGrp}
