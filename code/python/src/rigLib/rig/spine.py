@@ -32,7 +32,9 @@ def build(spineJoints,
         baseRig (`base.module.Base`, optional): Instance of `base.module.Base` class. Defaults to None.
 
     Returns:
-        dict[str, `base.module.Base`]: Dictionary with rig module objects.
+        Dictionary with rig module object and body control object.
+
+        {"module": `rigLib.base.module.Base`, "bodyCtrl": `rigLib.base.control.Control`}
 
     References:
         `A case for better Python docstrings`_
@@ -118,7 +120,7 @@ def build(spineJoints,
     # attach root joint
     mc.parentConstraint(pelvisCtrl.C, rootJnt, mo=1)
 
-    return {"module": rigmodule}
+    return {"module": rigmodule, "bodyCtrl": bodyCtrl}
 
 def _adjustBodyCtrlShape(bodyCtrl, spineJoints, rigScale):
     """offset body control along spine Y axis.

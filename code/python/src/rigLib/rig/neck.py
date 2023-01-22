@@ -26,7 +26,9 @@ def build(neckJoints,
         baseRig (`base.module.Base`, optional): Instance of `base.module.Base` class. Defaults to None.
 
     Returns:
-        dict[str, `base.module.Base`]: Dictionary with rig module objects.
+        Dictionary with rig module object and strings as group names.
+
+        {"module": `rigLib.base.module.Module`, "baseAttachGrp": str, "bodyAttachGrp": str}
 
     References:
         `A case for better Python docstrings`_

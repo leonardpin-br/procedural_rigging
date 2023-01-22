@@ -94,7 +94,7 @@ class Base():
         mc.setAttr("{}.ry".format(cls), 90)
         mc.delete(ctrlShapes, ch=1)
 
-        mc.move(5 * scale, ctrl.Off, moveY=True, relative=True)
+        mc.move(8 * scale, ctrl.Off, moveY=True, relative=True)
 
     def _flattenGlobalCtrlShape(self, ctrlObject):
 

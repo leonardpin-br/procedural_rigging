@@ -9,6 +9,7 @@ import maya.cmds as mc
 from rigLib.base import control
 from rigLib.base import module
 from rigLib.rig import spine
+from rigLib.rig import neck
 
 from . import project
 from . import komodo_deform
@@ -76,3 +77,16 @@ def makeControlSetup(baseRig):
                            rigScale=sceneScale,
                            baseRig=baseRig
                            )
+
+    # neck
+    neckJoints = ['neck1_jnt', 'neck2_jnt', 'neck3_jnt',
+                  'neck4_jnt', 'neck5_jnt', 'neck6_jnt']
+    neckRig = neck.build(neckJoints,
+                         headJnt=headJnt,
+                         neckCurve="neck_crv",
+                         prefix="neck",
+                         rigScale=sceneScale,
+                         baseRig=baseRig
+                         )
+    mc.parentConstraint(spineJoints[-2], neckRig["baseAttachGrp"], mo=1)
+    mc.parentConstraint(spineRig["bodyCtrl"].C, neckRig["bodyAttachGrp"], mo=1)
