@@ -19,7 +19,7 @@ Warning:
 
     To make that script a little bit more portable, the shebang line is:
 
-        #! /usr/bin/env python2
+        #! /usr/bin/env mayapy
 
 
     The use of the **mayapy** command, inside the ``make.bat`` file, makes all
