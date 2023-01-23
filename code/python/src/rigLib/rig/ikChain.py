@@ -65,3 +65,36 @@ def build(chainJoints,
                                 scale=crtlScale,
                                 parent=rigmodule.controlsGrp,
                                 shape="sphere")
+        chainControls.append(ctrl)
+
+    # parent controls
+    if fkParenting:
+        for i in range(numChainCVs):
+            if i == 0:
+                continue
+            mc.parent(chainControls[i].Off, chainControls[i - 1].C)
+
+    # attach clusters
+    for i in range(numChainCVs):
+        mc.parent(chainCurveClusters[i], chainControls[i].C)
+
+    # attach controls
+    mc.parentConstraint(baseAttachGrp, chainControls[0].Off, mo=1)
+
+    # make IK handle
+    chainIk = mc.ikHandle(n="{}_ikh".format(prefix),
+                          sol="ikSplineSolver",
+                          sj=chainJoints[0],
+                          ee=chainJoints[-1],
+                          c=chainCurve,
+                          ccv=0,
+                          parentCurve=0)[0]
+    mc.hide(chainIk)
+    mc.parent(chainIk, rigmodule.partsNoTransGrp)
+
+    # add twist attribute
+    twistAt = "twist"
+    mc.addAttr(chainControls[-1].C, ln=twistAt, k=1)
+    mc.connectAttr("{}.{}".format(chainControls[-1].C, twistAt), "{}.twist".format(chainIk))
+
+    return {"module": rigmodule, "baseAttachGrp": baseAttachGrp}

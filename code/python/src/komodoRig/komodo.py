@@ -8,8 +8,12 @@ import maya.cmds as mc
 
 from rigLib.base import control
 from rigLib.base import module
+
 from rigLib.rig import spine
 from rigLib.rig import neck
+from rigLib.rig import ikChain
+
+from rigLib.utils import joint
 
 from . import project
 from . import komodo_deform
@@ -90,3 +94,13 @@ def makeControlSetup(baseRig):
                          )
     mc.parentConstraint(spineJoints[-2], neckRig["baseAttachGrp"], mo=1)
     mc.parentConstraint(spineRig["bodyCtrl"].C, neckRig["bodyAttachGrp"], mo=1)
+
+    # tail
+    tailJoints = joint.listHierarchy("tail1_jnt")
+    ikChain.build(chainJoints=tailJoints,
+                    chainCurve="tail_crv",
+                    prefix="tail",
+                    rigScale=sceneScale,
+                    smallestScalePercent=0.4,
+                    fkParenting=False,
+                    baseRig=baseRig)
