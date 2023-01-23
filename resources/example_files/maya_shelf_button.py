@@ -16,5 +16,8 @@ for path in sys.path:
 else:
     sys.path.insert(0, module_path)
 
-import procedural_rigging
-reload(procedural_rigging)
+# Checks if the module was already imported. If so, reloads it.
+if "procedural_rigging" not in sys.modules:
+    import procedural_rigging
+else:
+    reload(procedural_rigging)
