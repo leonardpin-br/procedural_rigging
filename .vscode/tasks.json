@@ -38,12 +38,12 @@
 			"problemMatcher": []
 		},
 		{
-			"label": "Update QSS theme",
-			"detail": "Updates the (Combinear) .qss theme with new absolute paths.",
+			"label": "Update make.bat file",
+			"detail": "Updates the (Sphinx's) make.bat file with new absolute paths.",
 			"type": "shell",
 			"command": "bash",
 			"args": [
-				"./scripts/update_qss_theme.sh"
+				"./scripts/update_make_bat.sh"
 			],
 			"problemMatcher": []
 		},
