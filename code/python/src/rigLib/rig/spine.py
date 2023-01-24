@@ -98,6 +98,9 @@ def build(spineJoints,
     mc.parent(spineCurveClusters[2], middleCtrl.C)
     mc.parent(spineCurveClusters[:2], pelvisCtrl.C)
 
+    # attach chest joint
+    mc.orientConstraint(chestCtrl.C, spineJoints[-2], mo=1)
+
     # make IK handle
     spineIk = mc.ikHandle(n="{}_ikh".format(prefix),
                           sol="ikSplineSolver",

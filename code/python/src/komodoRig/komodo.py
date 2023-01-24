@@ -27,6 +27,8 @@ builderSceneFilePath = "%s/%s/builder/%s_builder.mb"
 
 rootJnt = "root1_jnt"
 headJnt = "head1_jnt"
+pelvisJnt = "pelvis1_jnt"
+jawJnt = "jaw1_jnt"
 
 
 def build(characterName):
@@ -97,10 +99,22 @@ def makeControlSetup(baseRig):
 
     # tail
     tailJoints = joint.listHierarchy("tail1_jnt")
-    ikChain.build(chainJoints=tailJoints,
+    tailRig = ikChain.build(chainJoints=tailJoints,
                     chainCurve="tail_crv",
                     prefix="tail",
                     rigScale=sceneScale,
                     smallestScalePercent=0.4,
                     fkParenting=False,
                     baseRig=baseRig)
+    mc.parentConstraint(pelvisJnt, tailRig["baseAttachGrp"], mo=1)
+
+    # tongue
+    tongueJoints = joint.listHierarchy("tongue1_jnt")
+    tongueRig = ikChain.build(chainJoints=tongueJoints,
+                    chainCurve="tongue_crv",
+                    prefix="tongue",
+                    rigScale=sceneScale * 0.2,
+                    smallestScalePercent=0.3,
+                    fkParenting=True,
+                    baseRig=baseRig)
+    mc.parentConstraint(jawJnt, tongueRig["baseAttachGrp"], mo=1)
