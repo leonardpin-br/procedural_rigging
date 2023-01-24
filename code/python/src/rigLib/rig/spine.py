@@ -47,7 +47,6 @@ def build(spineJoints,
        https://docs.python.org/3/library/typing.html#typing.Dict
     """
 
-
     # make rig module
     rigmodule = module.Module(prefix=prefix, baseObj=baseRig)
 
@@ -68,24 +67,24 @@ def build(spineJoints,
 
     # make controls
     bodyCtrl = control.Control(prefix="{}Body".format(prefix),
-                            translateTo=bodyLocator,
-                            scale=(rigScale * 4),
-                            parent=rigmodule.controlsGrp)
+                               translateTo=bodyLocator,
+                               scale=(rigScale * 4),
+                               parent=rigmodule.controlsGrp)
     chestCtrl = control.Control(prefix="{}Chest".format(prefix),
                                 translateTo=chestLocator,
                                 scale=(rigScale * 6),
                                 parent=bodyCtrl.C,
                                 shape="circleZ")
     pelvisCtrl = control.Control(prefix="{}Pelvis".format(prefix),
-                                translateTo=pelvisLocator,
-                                scale=(rigScale * 6),
-                                parent=bodyCtrl.C,
-                                shape="circleZ")
+                                 translateTo=pelvisLocator,
+                                 scale=(rigScale * 6),
+                                 parent=bodyCtrl.C,
+                                 shape="circleZ")
     middleCtrl = control.Control(prefix="{}Middle".format(prefix),
-                                translateTo=spineCurveClusters[2],
-                                scale=(rigScale * 3),
-                                parent=bodyCtrl.C,
-                                shape="circleZ")
+                                 translateTo=spineCurveClusters[2],
+                                 scale=(rigScale * 3),
+                                 parent=bodyCtrl.C,
+                                 shape="circleZ")
 
     _adjustBodyCtrlShape(bodyCtrl, spineJoints, rigScale)
 
@@ -124,6 +123,7 @@ def build(spineJoints,
     mc.parentConstraint(pelvisCtrl.C, rootJnt, mo=1)
 
     return {"module": rigmodule, "bodyCtrl": bodyCtrl}
+
 
 def _adjustBodyCtrlShape(bodyCtrl, spineJoints, rigScale):
     """offset body control along spine Y axis.

@@ -41,7 +41,6 @@ def build(neckJoints,
        https://docs.python.org/3/library/typing.html#typing.Dict
     """
 
-
     # make rig module
     rigmodule = module.Module(prefix=prefix, baseObj=baseRig)
 
@@ -52,7 +51,8 @@ def build(neckJoints,
 
     for i in range(numNeckCVs):
         clusterWithNumber = "Cluster%d" % (i + 1)
-        cls = mc.cluster(neckCurveCVs[i], n="{}{}".format(prefix, clusterWithNumber))[1]
+        cls = mc.cluster(neckCurveCVs[i], n="{}{}".format(
+            prefix, clusterWithNumber))[1]
         neckCurveClusters.append(cls)
     mc.hide(neckCurveClusters)
 
@@ -60,23 +60,25 @@ def build(neckJoints,
     mc.parent(neckCurve, rigmodule.partsNoTransGrp)
 
     # make attach groups
-    bodyAttachGrp = mc.group(n="{}BodyAttach_grp".format(prefix), em=1, p=rigmodule.partsGrp)
-    baseAttachGrp = mc.group(n="{}BaseAttach_grp".format(prefix), em=1, p=rigmodule.partsGrp)
+    bodyAttachGrp = mc.group(n="{}BodyAttach_grp".format(
+        prefix), em=1, p=rigmodule.partsGrp)
+    baseAttachGrp = mc.group(n="{}BaseAttach_grp".format(
+        prefix), em=1, p=rigmodule.partsGrp)
 
     mc.delete(mc.pointConstraint(neckJoints[0], baseAttachGrp))
 
     # make controls
     headMainCtrl = control.Control(prefix="{}HeadMain".format(prefix),
-                            translateTo=neckJoints[-1],
-                            scale=(rigScale * 5),
-                            parent=rigmodule.controlsGrp,
-                            shape="circleZ")
+                                   translateTo=neckJoints[-1],
+                                   scale=(rigScale * 5),
+                                   parent=rigmodule.controlsGrp,
+                                   shape="circleZ")
     headLocalCtrl = control.Control(prefix="{}HeadLocal".format(prefix),
-                            translateTo=headJnt,
-                            rotateTo=headJnt,
-                            scale=(rigScale * 4),
-                            parent=headMainCtrl.C,
-                            shape="circleX")
+                                    translateTo=headJnt,
+                                    rotateTo=headJnt,
+                                    scale=(rigScale * 4),
+                                    parent=headMainCtrl.C,
+                                    shape="circleX")
     middleCtrl = control.Control(prefix="Middle".format(prefix),
                                  translateTo=neckCurveClusters[2],
                                  rotateTo=neckJoints[2],
@@ -100,12 +102,12 @@ def build(neckJoints,
 
     # make IK handle
     neckIk = mc.ikHandle(n="{}_ikh".format(prefix),
-                          sol="ikSplineSolver",
-                          sj=neckJoints[0],
-                          ee=neckJoints[-1],
-                          c=neckCurve,
-                          ccv=0,
-                          parentCurve=0)[0]
+                         sol="ikSplineSolver",
+                         sj=neckJoints[0],
+                         ee=neckJoints[-1],
+                         c=neckCurve,
+                         ccv=0,
+                         parentCurve=0)[0]
     mc.hide(neckIk)
     mc.parent(neckIk, rigmodule.partsNoTransGrp)
 

@@ -41,7 +41,8 @@ def build(chainJoints,
 
     for i in range(numChainCVs):
         clusterWithNumber = "Cluster%d" % (i + 1)
-        cls = mc.cluster(chainCurveCVs[i], n="{}{}".format(prefix, clusterWithNumber))[1]
+        cls = mc.cluster(chainCurveCVs[i], n="{}{}".format(
+            prefix, clusterWithNumber))[1]
         chainCurveClusters.append(cls)
     mc.hide(chainCurveClusters)
 
@@ -49,7 +50,8 @@ def build(chainJoints,
     mc.parent(chainCurve, rigmodule.partsNoTransGrp)
 
     # make attach groups
-    baseAttachGrp = mc.group(n="{}BaseAttach_grp".format(prefix), em=1, p=rigmodule.partsGrp)
+    baseAttachGrp = mc.group(n="{}BaseAttach_grp".format(
+        prefix), em=1, p=rigmodule.partsGrp)
     mc.delete(mc.pointConstraint(chainJoints[0], baseAttachGrp))
 
     # make controls
@@ -58,13 +60,14 @@ def build(chainJoints,
     mainCtrlScaleFactor = 5.0
 
     for i in range(numChainCVs):
-        crtlScale = rigScale * mainCtrlScaleFactor * (1.0 - (i * controlScaleIncrement))
+        crtlScale = rigScale * mainCtrlScaleFactor * \
+            (1.0 - (i * controlScaleIncrement))
         prefixNumber = "%d" % (i + 1)
         ctrl = control.Control(prefix="{}{}".format(prefix, prefixNumber),
-                                translateTo=chainCurveClusters[i],
-                                scale=crtlScale,
-                                parent=rigmodule.controlsGrp,
-                                shape="sphere")
+                               translateTo=chainCurveClusters[i],
+                               scale=crtlScale,
+                               parent=rigmodule.controlsGrp,
+                               shape="sphere")
         chainControls.append(ctrl)
 
     # parent controls
@@ -95,6 +98,7 @@ def build(chainJoints,
     # add twist attribute
     twistAt = "twist"
     mc.addAttr(chainControls[-1].C, ln=twistAt, k=1)
-    mc.connectAttr("{}.{}".format(chainControls[-1].C, twistAt), "{}.twist".format(chainIk))
+    mc.connectAttr("{}.{}".format(
+        chainControls[-1].C, twistAt), "{}.twist".format(chainIk))
 
     return {"module": rigmodule, "baseAttachGrp": baseAttachGrp}
