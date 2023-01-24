@@ -92,7 +92,7 @@ def build(legJoints,
     # make IK handles
 
     if scapulaJnt:
-        scapuleIk = mc.ikHandle(n="{}Scapula_ikh".format(prefix)
+        scapulaIk = mc.ikHandle(n="{}Scapula_ikh".format(prefix)
                                 sol="ikSCsolver",
                                 sj=scapulaJnt,
                                 ee=legJoints[0])[0]
@@ -119,9 +119,9 @@ def build(legJoints,
         toeJoints = joint.listHierarchy(topToeJnt)
 
         toeIk = mc.ikHandle(n="{}_ikh".format(toePrefix),
-                             sol="ikSCsolver",
-                             sj=toeJoints[1],
-                             ee=toeJoints[-1])[0]
+                            sol="ikSCsolver",
+                            sj=toeJoints[1],
+                            ee=toeJoints[-1])[0]
         mc.hide(toeIk)
         mc.parent(toeIk, toeIkControls[i].C)
 
@@ -131,3 +131,34 @@ def build(legJoints,
 
     if scapulaJnt:
         mc.parentConstraint(baseAttachGrp, scapulaCtrl.Off, mo=1)
+
+    # attach objects to controls
+
+    mc.parent(legIk, ballCtrl.C)
+    mc.parent(ballIk, mainToeIk, footCtrl.C)
+
+    mc.poleVectorConstraint(poleVectorCtrl.C, legIk)
+
+    if scapulaJnt:
+        mc.parent(scapulaIk, scapulaCtrl.C)
+        mc.pointConstraint(scapulaCtrl.C, scapulaJnt)
+
+    # make pole vector connection line
+
+    pvLinePos1 = mc.xform(legJoints[1], q=1 t=1, ws=1)
+    pvLinePos2 = mc.xform(pvLocator, q=1 t=1, ws=1)
+    poleVectorCrv = mc.curve(n="{}Pv_crv".format(prefix),
+                             d=1,
+                             p=[pvLinePos1, pvLinePos2])
+    mc.cluster("{}.cv[0]".format(poleVectorCrv),
+                n="{}Pv1_cls".format(prefix),
+                wn=[legJoints[1], legJoints[1]],
+                bs=True)
+    mc.cluster("{}.cv[1]".format(poleVectorCrv),
+                n="{}Pv2_cls".format(prefix),
+                wn=[poleVectorCtrl.C, poleVectorCtrl.C],
+                bs=True)
+    mc.parent(poleVectorCrv, rigmodule.controlsGrp)
+    mc.setAttr("{}.template".format(poleVectorCrv), 1)
+
+    return {"module": rigmodule, "baseAttachGrp": baseAttachGrp, "bodyAttachGrp": bodyAttachGrp}

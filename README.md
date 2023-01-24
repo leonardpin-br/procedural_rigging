@@ -48,6 +48,7 @@ This project is dependent on rigid naming conventions.
 ### Naming conventions inside the Maya files
 | Nodes    | convention  | Example    |
 |----------|-------------|------------|
+| Cluster  | name#_cls   | spine1_jnt |
 | Joints   | name#_jnt   | spine1_jnt |
 | Curves   | name_crv    | spine_crv  |
 | Locators | name_loc    | body_loc   |

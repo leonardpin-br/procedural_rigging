@@ -12,6 +12,7 @@ from rigLib.base import module
 from rigLib.rig import spine
 from rigLib.rig import neck
 from rigLib.rig import ikChain
+from rigLib.rig import leg
 
 from rigLib.utils import joint
 
