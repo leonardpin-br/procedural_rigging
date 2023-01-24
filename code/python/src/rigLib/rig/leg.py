@@ -38,9 +38,11 @@ def build(legJoints,
     rigmodule = module.Module(prefix=prefix, baseObj=baseRig)
 
     # make attach groups
+
     bodyAttachGrp = mc.group(n="{}BodyAttach_grp".format(prefix),
                              em=1,
                              p=rigmodule.partsGrp)
+
     baseAttachGrp = mc.group(n="{}BaseAttach_grp".format(prefix),
                              em=1,
                              p=rigmodule.partsGrp)
@@ -86,3 +88,46 @@ def build(legJoints,
                                     parent=footCtrl.C,
                                     shape="circleY")
         toeIkControls.append(toeIkCtrl)
+
+    # make IK handles
+
+    if scapulaJnt:
+        scapuleIk = mc.ikHandle(n="{}Scapula_ikh".format(prefix)
+                                sol="ikSCsolver",
+                                sj=scapulaJnt,
+                                ee=legJoints[0])[0]
+
+    legIk = mc.ikHandle(n="{}Main_ikh".format(prefix),
+                        sol="ikRPsolver",
+                        sj=legJoints[0],
+                        ee=legJoints[2])[0]
+
+    ballIk = mc.ikHandle(n="{}Ball_ikh".format(prefix),
+                         sol="ikSCsolver",
+                         sj=legJoints[2],
+                         ee=legJoints[3])[0]
+
+    mainToeIk = mc.ikHandle(n="{}MainToe_ikh".format(prefix),
+                            sol="ikSCsolver",
+                            sj=legJoints[3],
+                            ee=legJoints[4])[0]
+
+    mc.hide(legIk, ballIk, mainToeIk)
+
+    for i, topToeJnt in enumerate(topToeJoints):
+        toePrefix = name.removeSuffix(topToeJnt)[:-1]
+        toeJoints = joint.listHierarchy(topToeJnt)
+
+        toeIk = mc.ikHandle(n="{}_ikh".format(toePrefix),
+                             sol="ikSCsolver",
+                             sj=toeJoints[1],
+                             ee=toeJoints[-1])[0]
+        mc.hide(toeIk)
+        mc.parent(toeIk, toeIkControls[i].C)
+
+    # attach controls
+
+    mc.parentConstraint(bodyAttachGrp, poleVectorCtrl.Off, mo=1)
+
+    if scapulaJnt:
+        mc.parentConstraint(baseAttachGrp, scapulaCtrl.Off, mo=1)

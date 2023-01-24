@@ -80,7 +80,7 @@ This project is dependent on rigid naming conventions.
 |-- node_modules                (Node.js specific files)
 |-- py27env                     (virtual environment folder)
 |-- resources                   (good to have and needed files)
-|   `-- documentation_config    (configuration file for Sphinx)
+|   `-- documentation_config    (configuration for Sphinx)
 |   `-- example_files           (files that can be used as reference)
 |-- scripts                     (usefull bash scripts)
 |-- tests                       (Should contain unit tests, if you decide to use them.)
