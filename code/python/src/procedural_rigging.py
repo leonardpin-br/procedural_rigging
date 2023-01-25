@@ -60,6 +60,5 @@ print("komodoRig.komodo.build() function executed successfully!")
 rigLib.base.control.Control(shape="sphere")
 
 print("\n\n===========================================================\n")
-print("Python executable full path:")
-print(sys.executable)
+print("Course finished!!!")
 print("\n===========================================================\n\n")
