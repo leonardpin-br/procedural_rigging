@@ -4,11 +4,11 @@ u"""leg @ rig
 
 import maya.cmds as mc
 
-from .. base import module
-from .. base import control
+from ..base import module
+from ..base import control
 
-from .. utils import joint
-from .. utils import name
+from ..utils import joint
+from ..utils import name
 
 
 def build(legJoints,
@@ -92,7 +92,7 @@ def build(legJoints,
     # make IK handles
 
     if scapulaJnt:
-        scapulaIk = mc.ikHandle(n="{}Scapula_ikh".format(prefix)
+        scapulaIk = mc.ikHandle(n="{}Scapula_ikh".format(prefix),
                                 sol="ikSCsolver",
                                 sj=scapulaJnt,
                                 ee=legJoints[0])[0]
@@ -145,8 +145,8 @@ def build(legJoints,
 
     # make pole vector connection line
 
-    pvLinePos1 = mc.xform(legJoints[1], q=1 t=1, ws=1)
-    pvLinePos2 = mc.xform(pvLocator, q=1 t=1, ws=1)
+    pvLinePos1 = mc.xform(legJoints[1], q=1, t=1, ws=1)
+    pvLinePos2 = mc.xform(pvLocator, q=1, t=1, ws=1)
     poleVectorCrv = mc.curve(n="{}Pv_crv".format(prefix),
                              d=1,
                              p=[pvLinePos1, pvLinePos2])

@@ -71,6 +71,10 @@ def makeControlSetup(baseRig):
         baseRig (`rigLib.base.module.Base`): Instance of `rigLib.base.module.Base`.
     """
 
+    # adjust orientation of feet
+    mc.setAttr("l_hand1_jnt.jo", 138.28570432475698, -48.90539524404269, -30.284152362844438)
+    mc.setAttr("r_hand1_jnt.jo", 138.28570432475684, -48.905395244042566, -30.28415236284434)
+
     # spine
     spineJoints = ['spine1_jnt', 'spine2_jnt', 'spine3_jnt',
                    'spine4_jnt', 'spine5_jnt', 'spine6_jnt']
