@@ -124,6 +124,8 @@ class Module():
         self.partsGrp = mc.group(n="{}Parts_grp".format(prefix), em=1, p=self.topGrp)
         self.partsNoTransGrp = mc.group(n="{}PartsNoTrans_grp".format(prefix), em=1, p=self.topGrp)
 
+        mc.hide(self.partsGrp, self.partsNoTransGrp)
+
         mc.setAttr("{}.it".format(self.partsNoTransGrp), 0, l=1)
 
         # Parent module

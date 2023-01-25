@@ -13,6 +13,7 @@ from rigLib.rig import spine
 from rigLib.rig import neck
 from rigLib.rig import ikChain
 from rigLib.rig import leg
+from rigLib.rig import headParts
 
 from rigLib.utils import joint
 
@@ -63,6 +64,10 @@ def build(characterName):
     # control setup
     makeControlSetup(baseRig)
 
+    # delete build objects
+    builderGrp = "builder_grp"
+    mc.delete(builderGrp)
+
 
 def makeControlSetup(baseRig):
     """make control setup
@@ -72,8 +77,10 @@ def makeControlSetup(baseRig):
     """
 
     # adjust orientation of feet
-    mc.setAttr("l_hand1_jnt.jo", 138.28570432475698, -48.90539524404269, -30.284152362844438)
-    mc.setAttr("r_hand1_jnt.jo", 138.28570432475684, -48.905395244042566, -30.28415236284434)
+    mc.setAttr("l_hand1_jnt.jo", 138.28570432475698, -
+               48.90539524404269, -30.284152362844438)
+    mc.setAttr("r_hand1_jnt.jo", 138.28570432475684, -
+               48.905395244042566, -30.28415236284434)
 
     # spine
     spineJoints = ['spine1_jnt', 'spine2_jnt', 'spine3_jnt',
@@ -183,3 +190,14 @@ def makeControlSetup(baseRig):
                         baseRig=baseRig)
     mc.parentConstraint(spineJoints[-2], rLegRig["baseAttachGrp"], mo=1)
     mc.parentConstraint(spineRig["bodyCtrl"].C, rLegRig["bodyAttachGrp"], mo=1)
+
+    # head parts
+    muzzleJoints = ["muzzle1_jnt", "muzzle2_jnt"]
+    headParts.build(headJnt=headJnt,
+                    jawJnt=jawJnt,
+                    muzzleJoints=muzzleJoints,
+                    leftEyeJnt="l_eye1_jnt",
+                    rightEyeJnt="r_eye1_jnt",
+                    prefix="headParts",
+                    rigScale=sceneScale,
+                    baseRig=baseRig)
