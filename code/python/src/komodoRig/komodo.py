@@ -119,3 +119,63 @@ def makeControlSetup(baseRig):
                               fkParenting=True,
                               baseRig=baseRig)
     mc.parentConstraint(jawJnt, tongueRig["baseAttachGrp"], mo=1)
+
+    # left arm
+    legJoints = ["l_shoulder1_jnt", "l_elbow1_jnt",
+                 "l_hand1_jnt", "l_hand2_jnt", "l_hand3_jnt"]
+    topToeJoints = ["l_foreToeA1_jnt", "l_foreToeB1_jnt",
+                    "l_foreToeC1_jnt", "l_foreToeD1_jnt", "l_foreToeE1_jnt"]
+    lArmRig = leg.build(legJoints=legJoints,
+                        topToeJoints=topToeJoints,
+                        pvLocator="l_arm_pole_vector_loc",
+                        scapulaJnt="l_scapula1_jnt",
+                        prefix="l_arm",
+                        rigScale=sceneScale,
+                        baseRig=baseRig)
+    mc.parentConstraint(spineJoints[-2], lArmRig["baseAttachGrp"], mo=1)
+    mc.parentConstraint(spineRig["bodyCtrl"].C, lArmRig["bodyAttachGrp"], mo=1)
+
+    # right arm
+    legJoints = ["r_shoulder1_jnt", "r_elbow1_jnt",
+                 "r_hand1_jnt", "r_hand2_jnt", "r_hand3_jnt"]
+    topToeJoints = ["r_foreToeA1_jnt", "r_foreToeB1_jnt",
+                    "r_foreToeC1_jnt", "r_foreToeD1_jnt", "r_foreToeE1_jnt"]
+    rArmRig = leg.build(legJoints=legJoints,
+                        topToeJoints=topToeJoints,
+                        pvLocator="r_arm_pole_vector_loc",
+                        scapulaJnt="r_scapula1_jnt",
+                        prefix="r_arm",
+                        rigScale=sceneScale,
+                        baseRig=baseRig)
+    mc.parentConstraint(spineJoints[-2], rArmRig["baseAttachGrp"], mo=1)
+    mc.parentConstraint(spineRig["bodyCtrl"].C, rArmRig["bodyAttachGrp"], mo=1)
+
+    # left leg
+    legJoints = ["l_hip1_jnt", "l_knee1_jnt",
+                 "l_foot1_jnt", "l_foot2_jnt", "l_foot3_jnt"]
+    topToeJoints = ["l_hindToeA1_jnt", "l_hindToeB1_jnt",
+                    "l_hindToeC1_jnt", "l_hindToeD1_jnt", "l_hindToeE1_jnt"]
+    lLegRig = leg.build(legJoints=legJoints,
+                        topToeJoints=topToeJoints,
+                        pvLocator="l_leg_pole_vector_loc",
+                        scapulaJnt="",
+                        prefix="l_leg",
+                        rigScale=sceneScale,
+                        baseRig=baseRig)
+    mc.parentConstraint(spineJoints[-2], lLegRig["baseAttachGrp"], mo=1)
+    mc.parentConstraint(spineRig["bodyCtrl"].C, lLegRig["bodyAttachGrp"], mo=1)
+
+    # right leg
+    legJoints = ["r_hip1_jnt", "r_knee1_jnt",
+                 "r_foot1_jnt", "r_foot2_jnt", "r_foot3_jnt"]
+    topToeJoints = ["r_hindToeA1_jnt", "r_hindToeB1_jnt",
+                    "r_hindToeC1_jnt", "r_hindToeD1_jnt", "r_hindToeE1_jnt"]
+    rLegRig = leg.build(legJoints=legJoints,
+                        topToeJoints=topToeJoints,
+                        pvLocator="r_leg_pole_vector_loc",
+                        scapulaJnt="",
+                        prefix="r_leg",
+                        rigScale=sceneScale,
+                        baseRig=baseRig)
+    mc.parentConstraint(spineJoints[-2], rLegRig["baseAttachGrp"], mo=1)
+    mc.parentConstraint(spineRig["bodyCtrl"].C, rLegRig["bodyAttachGrp"], mo=1)
