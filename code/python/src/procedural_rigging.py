@@ -57,8 +57,6 @@ characterName = "komodo"
 komodoRig.komodo.build(characterName)
 print("komodoRig.komodo.build() function executed successfully!")
 
-rigLib.base.control.Control(shape="sphere")
-
 print("\n\n===========================================================\n")
 print("Course finished!!!")
 print("\n===========================================================\n\n")
